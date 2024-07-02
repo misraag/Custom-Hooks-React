@@ -22,7 +22,7 @@ app.get('/places', async (req, res) => {
   const fileContent = await fs.readFile('./data/places.json');
 
   const placesData = JSON.parse(fileContent);
-
+  console.log("user is requesting places")
   res.status(200).json({ places: placesData });
 });
 
@@ -30,7 +30,7 @@ app.get('/user-places', async (req, res) => {
   const fileContent = await fs.readFile('./data/user-places.json');
 
   const places = JSON.parse(fileContent);
-
+  console.log("user is requesting user-places")
   res.status(200).json({ places });
 });
 
@@ -38,7 +38,7 @@ app.put('/user-places', async (req, res) => {
   const places = req.body.places;
 
   await fs.writeFile('./data/user-places.json', JSON.stringify(places));
-
+  console.log("user is updating user-places")
   res.status(200).json({ message: 'User places updated!' });
 });
 
@@ -50,4 +50,6 @@ app.use((req, res, next) => {
   res.status(404).json({ message: '404 - Not Found' });
 });
 
-app.listen(3000);
+app.listen(3000, ()=> {
+  console.log("Server is listening to port 3000...")
+});
